@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 #take the csv file and converting it to a DataFrame object
 #index_col = 0 will set the first column up as the row index
@@ -24,7 +26,7 @@ print("Days that bitcoin was over or equal than 60k is " + str(sum(bitcoin_60)) 
 #Date is not a Datetimelike value
 #Error: Can only use .dt accessor with datetimelike value
 #Convert to Date
-bitcoin_data['Date'] = pd.to_datetime(bitcoin_data.Date, format='%Y-%m-%d %H:%M:%S')
+bitcoin_data['Date'] = pd.to_datetime(bitcoin_data.Date, format='%Y-%m-%d')
 #print(bitcoin_data['Date'].dt.year)
 
 #group by Date and calculate some agg for each year
@@ -38,4 +40,22 @@ bitcoin_by_year.columns = bitcoin_by_year.columns.droplevel(0)
 #Let's calculate how much bitcoin % growth/loss each year 100 * (p2 - p1) / p1
 bitcoin_by_year['Percentage_Change'] = 100 * (bitcoin_by_year['amax'] -  bitcoin_by_year['amin']) / bitcoin_by_year['amin']
 
-print(bitcoin_by_year)
+
+
+#lets calculate the median price per month of bitcoin and plot it
+#bitcoin_data['Year'] = bitcoin_data['Date'].dt.year
+#bitcoin_median_month = bitcoin_data.groupby([bitcoin_data['Year'], bitcoin_data['Date'].dt.month]).median().reset_index()
+
+#bitcoin_median_month['Date'] = pd.to_datetime(bitcoin_median_month['Date'])
+#bitcoin_median_month.set_index('Date', inplace=True)
+
+print(bitcoin_data.head())
+bitcoin_data.set_index('Date', inplace=True)
+#cleaner graph if we just plotted the monthly averages
+bitcoin_median_month = bitcoin_data.resample('M').mean()
+#round the dates off to whatever period you specify. round of to months
+bitcoin_median_month.index = bitcoin_median_month.index.to_period('M')
+
+bitcoin_median_month['High'].plot()
+
+plt.show()

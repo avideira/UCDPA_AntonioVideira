@@ -13,7 +13,6 @@ headers = {
 session = Session()
 session.headers.update(headers)
 
-
 response = session.get(url, params=parameters)
 data = json.loads(response.text)
 print(data)
