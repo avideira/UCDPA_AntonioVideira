@@ -25,7 +25,7 @@ df_coins['Close_sol'] = pd.to_numeric(df_coins['Close_sol'], errors='coerce').fi
 #print(df_coins.head())
 #print(df_coins.shape)
 
-#let's get the data for the last two year: 2020 and 2021
+#let's get the data for the last two years: 2020 and 2021
 start_date = pd.to_datetime('2020-01-01 00:00:00.000000000')
 end_date = pd.to_datetime('2022-01-01 00:00:00.000000000')                         
 df_coins['Open Time'] = pd.to_datetime(df_coins['Open Time']) 
