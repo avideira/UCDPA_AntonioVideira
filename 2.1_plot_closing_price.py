@@ -37,9 +37,9 @@ crypto_lastyears.to_csv('Data\Crypto_Data_Merged.csv')
 
 crypto_data = crypto_lastyears.set_index('Open Time')
 
-print(crypto_data.head())
-print(crypto_data.shape)
-print(crypto_data)
+#print(crypto_data.head())
+#print(crypto_data.shape)
+#print(crypto_data)
 
 fig, axs = plt.subplots(4, 1, sharex=True, figsize=(12, 8))
 fig.tight_layout(h_pad=1)

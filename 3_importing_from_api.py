@@ -21,7 +21,11 @@ response = session.get(url, params=parameters)
 #returns a nested dictionary
 data = json.loads(response.text)
 
+print(type(data))
+
 df = pd.DataFrame(data)
+#print(df.head())
+#print(df.shape)
 
 # Sort the rows of dataframe by trust score and volume traded
 rslt_df = df.sort_values(by = ['trust_score_rank','trade_volume_24h_btc'], ascending=[True,False])
@@ -44,6 +48,6 @@ sns.despine(left=True, bottom=True)
 
 plt.subplots_adjust(left=0.21)
 
-Volume_top_exchanges.png
+#fig.savefig('Volume_top_exchanges.png')
 
 plt.show()
